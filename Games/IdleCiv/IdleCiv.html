@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Idle Civilization</title>
+	<link rel="stylesheet" type="text/css" href="interface.css">
+</head>
+<body>
+	<div class="container">
+		<section class="action-section">
+			<div class="tab">
+				<button class="tablinks" onclick="openTab(event, 'resources')">Resources</button>
+				<button class="tablinks" onclick="openTab(event, 'jobs')">Jobs</button>
+				<button class="tablinks" onclick="openTab(event, 'buildings')">Buildings</button>
+			</div>
+		</section>
+
+		<section class="content-section">
+			<div id="resources" class="tabcontent">
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Amount</th>
+						<th>Max Amount</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td><p id="foodName"></p></td>
+						<td><p id="foodValue"></p></td>
+						<td><p id="foodMaxValue"></p></td>
+						<td><p id="foodDescription"></p></td>
+					</tr>
+					<tr>
+						<td><p id="woodName"></p></td>
+						<td><p id="woodValue"></p></td>
+						<td><p id="woodMaxValue"></p></td>
+						<td><p id="woodDescription"></p></td>
+					</tr>
+					<tr>
+						<td><p id="stoneName"></p></td>
+						<td><p id="stoneValue"></p></td>
+						<td><p id="stoneMaxValue"></p></td>
+						<td><p id="stoneDescription"></p></td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="jobs" class="tabcontent">
+				<table>
+					<tr>
+						<th class="no-border"></th>
+						<th>Name</th>
+						<th>Amount</th>
+						<th>Max Value</th>
+						<th>Description</th>
+						<th class="no-border"></th>
+					</tr>
+					<tr>
+						<td class="no-border"><button onmousedown="addWorkers(unemployed, -1)">-1</button></td>
+						<td><p id="unemployedName"></p></td>
+						<td><p id="unemployedValue"></p></td>
+						<td><p id="unemployedMaxValue"></p></td>
+						<td><p id="unemployedDescription"></p></td>
+						<td class="no-border"><button onmousedown="addWorkers(unemployed, 1)">+1</button></td>
+					</tr>
+					<tr>
+						<td class="no-border"><button onmousedown="addWorkers(farmer, -1)">-1</button></td>
+						<td><p id="farmerName"></p></td>
+						<td><p id="farmerValue"></p></td>
+						<td><p id="farmerMaxValue"></p></td>
+						<td><p id="farmerDescription"></p></td>
+						<td class="no-border"><button onmousedown="addWorkers(farmer, 1)">+1</button></td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="buildings" class="tabcontent">
+			</div>
+		</section>
+	</div>
+
+	<script src="main.js"></script>
+</body>
+</html>
