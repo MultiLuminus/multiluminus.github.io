@@ -20,6 +20,7 @@ var stone = {
   maxValue: 10
 };
 
+// Jobs
 var unemployed = {
   name: "Unemployed",
   description: "These people don't have a job. Let's change that!",
@@ -33,6 +34,45 @@ var farmer = {
   value: 0,
   maxValue: 1
 };
+
+var woodcutter = {
+  name: "Woodcutter",
+  description: "TIMBER!",
+  value: 0,
+  maxValue: 1
+};
+
+var miner = {
+  name: "Miner",
+  description: "They spent all their time underground, gathering precious rocks.",
+  value: 0,
+  maxValue: 1
+};
+
+function addResource(resource, amount) {
+  if (amount < 0) {
+    var unallowedResources = -(resource.value + amount);
+  }
+  else {
+    var unallowedResources = resource.value + amount - resource.maxValue;
+  }
+
+  if (unallowedResources > 0 && amount > 0) {
+    resource.value = resource.maxValue;
+    updateUIJobs();
+    console.log("Could not add '" + unallowedResources + "' " + resource.name + "!")
+  }
+  else if (unallowedResources > 0 && amount < 0) {
+    resource.value = 0;
+    updateUIJobs();
+    console.log("Could not remove '" + unallowedResources + "' " + resource.name + "!")
+  }
+  else {
+    resource.value += amount;
+  }
+  updateUIJobs();
+  return unallowedResources;
+}
 
 function addWorkers(job, amount) {
   if (amount < 0) {
@@ -58,8 +98,6 @@ function addWorkers(job, amount) {
   updateUIJobs();
   return unallowedWorkers;
 }
-
-
 
 function updateUIResources() {
   // Stone
@@ -90,6 +128,16 @@ function updateUIJobs() {
   document.getElementById("farmerDescription").innerHTML = farmer.description;
   document.getElementById("farmerValue").innerHTML = farmer.value;
   document.getElementById("farmerMaxValue").innerHTML = farmer.maxValue;
+  // Woodcutter
+  document.getElementById("woodcutterName").innerHTML = woodcutter.name;
+  document.getElementById("woodcutterDescription").innerHTML = woodcutter.description;
+  document.getElementById("woodcutterValue").innerHTML = woodcutter.value;
+  document.getElementById("woodcutterMaxValue").innerHTML = woodcutter.maxValue;
+  // Miner
+  document.getElementById("minerName").innerHTML = miner.name;
+  document.getElementById("minerDescription").innerHTML = miner.description;
+  document.getElementById("minerValue").innerHTML = miner.value;
+  document.getElementById("minerMaxValue").innerHTML = miner.maxValue;
 }
 
 function updateUIAll(){
@@ -134,3 +182,10 @@ function CloseTabs(){
 
 CloseTabs();
 updateUIAll();
+
+window.setInterval(function(){
+  addResource(food, farmer.value);
+  addResource(wood, woodcutter.value);
+  addResource(stone, miner.value);
+  updateUIAll();
+}, 1000);
