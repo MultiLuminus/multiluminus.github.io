@@ -74,7 +74,28 @@ function addResource(resource, amount) {
   return unallowedResources;
 }
 
+function assignWorkers(job, amount) {
+  if (amount > 0) {
+    addWorkers(job, amount);
+  }
+  else {
+    removeWorkers(job, amount);
+  }
+}
+
 function addWorkers(job, amount) {
+
+  var availableWorkers = unemployed.value;
+
+  if (availableWorkers >= amount) {
+    if (amount <= job.maxValue - job.value)
+    {
+
+    }
+    job.value += amount;
+  }
+
+  /* OLD
   if (amount < 0) {
     var unallowedWorkers = -(job.value + amount);
   }
@@ -84,19 +105,29 @@ function addWorkers(job, amount) {
 
   if (unallowedWorkers > 0 && amount > 0) {
     job.value = job.maxValue;
-    updateUIJobs();
     console.log("Could not add '" + unallowedWorkers + "' " + job.name + "!")
   }
   else if (unallowedWorkers > 0 && amount < 0) {
     job.value = 0;
-    updateUIJobs();
     console.log("Could not remove '" + unallowedWorkers + "' " + job.name + "!")
   }
   else {
+    if (job != unemployed) {
+      unemployed.value -= amount;
+    }
     job.value += amount;
   }
   updateUIJobs();
   return unallowedWorkers;
+  */
+}
+
+function removeWorkers(job, amount) {
+
+}
+
+function getResourceProduction(resource, miliseconds) {
+
 }
 
 function updateUIResources() {
